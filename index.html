@@ -1,0 +1,1654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>International Travel (IT) - Your Global Travel Toolkit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Design System - Core Variables */
+        :root {
+            /* Colors */
+            --color-primary: #ffffff;
+            --color-secondary: #f8f9fa;
+            --color-text-primary: #1a1a1a;
+            --color-text-secondary: #111;
+            --color-accent: #4ecdc4;
+            --color-accent-light: #e8f8f7;
+            --color-border: #e9ecef;
+            --color-shadow: rgba(0, 0, 0, 0.08);
+            
+            /* Typography */
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-size-xs: 0.75rem;
+            --font-size-sm: 0.875rem;
+            --font-size-base: 1rem;
+            --font-size-lg: 1.125rem;
+            --font-size-xl: 1.25rem;
+            --font-size-2xl: 1.5rem;
+            --font-size-3xl: 2rem;
+            --font-size-4xl: 2.5rem;
+            
+            /* Spacing */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.25rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-10: 2.5rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-20: 5rem;
+            
+            /* Border Radius */
+            --radius-sm: 0.25rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            
+            /* Transitions */
+            --transition-fast: 150ms ease;
+            --transition-base: 250ms ease;
+            --transition-slow: 350ms ease;
+            
+            /* Breakpoints */
+            --breakpoint-sm: 640px;
+            --breakpoint-md: 768px;
+            --breakpoint-lg: 1024px;
+            --breakpoint-xl: 1280px;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            font-size: var(--font-size-base);
+            line-height: 1.6;
+            color: var(--color-text-primary);
+            background-color: var(--color-primary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+
+        .text-center { text-align: center; }
+        .text-sm { font-size: var(--font-size-sm); }
+        .text-lg { font-size: var(--font-size-lg); }
+        .text-xl { font-size: var(--font-size-xl); }
+        .text-2xl { font-size: var(--font-size-2xl); }
+        .text-3xl { font-size: var(--font-size-3xl); }
+        .text-secondary { color: var(--color-text-secondary); }
+        .font-semibold { font-weight: 600; }
+        .font-bold { font-weight: 700; }
+        .mb-4 { margin-bottom: var(--space-4); }
+        .mb-6 { margin-bottom: var(--space-6); }
+        .mb-8 { margin-bottom: var(--space-8); }
+        .mt-8 { margin-top: var(--space-8); }
+        .py-12 { padding: var(--space-12) 0; }
+        .py-16 { padding: var(--space-16) 0; }
+
+        /* Header & Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: box-shadow var(--transition-base);
+        }
+
+        .header.scrolled {
+            box-shadow: 0 2px 20px var(--color-shadow);
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: var(--font-size-xl);
+            font-weight: 700;
+            color: var(--color-text-primary);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        .logo:hover {
+            color: var(--color-accent);
+        }
+
+        .logo i {
+            color: var(--color-accent);
+            margin-right: var(--space-2);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: var(--space-8);
+        }
+
+        .nav-link {
+            color: var(--color-text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: color var(--transition-fast);
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--color-accent);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-accent);
+            transition: width var(--transition-base);
+        }
+
+        .nav-link.active::after,
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+        }
+
+        .search-bar {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input {
+            padding: var(--space-2) var(--space-10) var(--space-2) var(--space-4);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            width: 250px;
+            font-size: var(--font-size-sm);
+            transition: all var(--transition-base);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 3px var(--color-accent-light);
+            width: 300px;
+        }
+
+        .search-btn {
+            position: absolute;
+            right: var(--space-2);
+            background: none;
+            border: none;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            padding: var(--space-2);
+            transition: color var(--transition-fast);
+        }
+
+        .search-btn:hover {
+            color: var(--color-accent);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: var(--font-size-xl);
+            color: var(--color-text-primary);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 100px;
+            background: linear-gradient(135deg, var(--color-accent-light) 70%, var(--color-primary) 100%);
+            padding: var(--space-20) 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--color-accent) 75%, transparent 70%);
+            opacity: 0.8;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: var(--font-size-4xl);
+            font-weight: 700;
+            margin-bottom: var(--space-4);
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: var(--font-size-lg);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-8);
+        }
+
+        .hero-search {
+            display: flex;
+            gap: var(--space-4);
+            max-width: 600px;
+            margin: 0 auto var(--space-8);
+        }
+
+        .hero-search-input {
+            flex: 1;
+            padding: var(--space-4) var(--space-6);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-xl);
+            font-size: var(--font-size-base);
+            transition: all var(--transition-base);
+        }
+
+        .hero-search-input:focus {
+            outline: none;
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 4px var(--color-accent-light);
+        }
+
+        .hero-search-btn {
+            padding: var(--space-4) var(--space-8);
+            background: var(--color-accent);
+            color: white;
+            border: none;
+            border-radius: var(--radius-xl);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .hero-search-btn:hover {
+            background: #3db8af;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(78, 205, 196, 0.8);
+        }
+
+        .quick-actions {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-4);
+            flex-wrap: wrap;
+        }
+
+        .quick-action-btn {
+            padding: var(--space-3) var(--space-6);
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            color: var(--color-text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all var(--transition-base);
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .quick-action-btn:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px var(--color-shadow);
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-12);
+        }
+
+        .section-title {
+            font-size: var(--font-size-3xl);
+            font-weight: 700;
+            margin-bottom: var(--space-3);
+        }
+
+        .section-description {
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-lg);
+        }
+
+        /* Card Components */
+        .card {
+            background: #3db8af;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: 0 2px 10px var(--color-shadow);
+            transition: all var(--transition-base);
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px var(--color-shadow);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .card:hover .card-image {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: var(--space-6);
+        }
+
+        .card-category {
+            display: inline-block;
+            padding: var(--space-1) var(--space-3);
+            background: var(--color-accent-light);
+            color: var(--color-accent);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-xs);
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: var(--space-3);
+        }
+
+        .card-title {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            margin-bottom: var(--space-3);
+            line-height: 1.3;
+        }
+
+        .card-description {
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-4);
+            line-height: 1.6;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+        }
+
+        .card-author {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .card-author img {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+        }
+
+        /* News Section */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--space-6);
+            margin-bottom: var(--space-16);
+        }
+
+        .featured-news {
+            grid-column: span 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-6);
+            background: #3db8af;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: 0 2px 20px var(--color-shadow);
+        }
+
+        .featured-news-image {
+            height: 100%;
+            min-height: 400px;
+            object-fit: cover;
+        }
+
+        .featured-news-content {
+            padding: var(--space-8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Destinations Section - Enhanced */
+        .destinations-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            position: relative;
+        }
+
+        .destinations-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-accent) 0%, #3db8af 50%, var(--color-accent) 100%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        .destinations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+            gap: var(--space-6);
+            margin-top: var(--space-12);
+        }
+
+        .destination-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius-xl);
+            background: #3db8af;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            transition: all var(--transition-slow);
+            height: 400px;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .destination-card .card-image {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .destination-card:hover .card-image {
+            transform: scale(1.1);
+        }
+
+        .destination-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 50%, transparent 100%);
+            padding: var(--space-8) var(--space-6) var(--space-6);
+            color: white;
+            transform: translateY(20px);
+            transition: transform var(--transition-base);
+        }
+
+        .destination-card:hover .destination-overlay {
+            transform: translateY(0);
+        }
+
+        .destination-title {
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+            margin-bottom: var(--space-3);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .destination-subtitle {
+            font-size: var(--font-size-sm);
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: var(--space-4);
+            font-style: italic;
+        }
+
+        .destination-stats {
+            display: flex;
+            gap: var(--space-6);
+            font-size: var(--font-size-sm);
+            align-items: center;
+        }
+
+        .destination-stat {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            background: rgba(255, 255, 255, 0.1);
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius-lg);
+            backdrop-filter: blur(10px);
+            transition: all var(--transition-fast);
+        }
+
+        .destination-stat:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: var(--space-1);
+        }
+
+        .rating i {
+            color: #ffd700;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .destination-badge {
+            position: absolute;
+            top: var(--space-4);
+            right: var(--space-4);
+            background: var(--color-accent);
+            color: white;
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius-lg);
+            font-size: var(--font-size-xs);
+            font-weight: 600;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(78, 205, 196, 0.4);
+            z-index: 10;
+        }
+
+        .destination-card:hover .destination-badge {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(78, 205, 196, 0.6);
+        }
+
+        /* Directory Section */
+        .directory-filters {
+            display: flex;
+            gap: var(--space-4);
+            margin-bottom: var(--space-8);
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: var(--space-2) var(--space-4);
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            color: var(--color-text-primary);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            font-weight: 500;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--color-accent);
+            color: white;
+            border-color: var(--color-accent);
+        }
+
+        .directory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-6);
+        }
+
+        .operator-card {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+            padding: var(--space-6);
+        }
+
+        .operator-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: var(--radius-lg);
+            object-fit: cover;
+        }
+
+        .operator-info {
+            flex: 1;
+        }
+
+        .operator-name {
+            font-weight: 600;
+            margin-bottom: var(--space-1);
+        }
+
+        .operator-services {
+            display: flex;
+            gap: var(--space-2);
+            flex-wrap: wrap;
+            margin-top: var(--space-2);
+        }
+
+        .service-tag {
+            padding: var(--space-1) var(--space-2);
+            background: var(--color-secondary);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-xs);
+            color: var(--color-text-secondary);
+        }
+
+        .verified-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-1);
+            padding: var(--space-1) var(--space-2);
+            background: #d4edda;
+            color: #155724;
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-xs);
+            font-weight: 600;
+        }
+
+        /* Jobs Section */
+        .jobs-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+        }
+
+        .job-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-6);
+            background: white;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border);
+            transition: all var(--transition-base);
+        }
+
+        .job-card:hover {
+            border-color: var(--color-accent);
+            box-shadow: 0 5px 20px var(--color-shadow);
+        }
+
+        .job-info {
+            flex: 1;
+        }
+
+        .job-title {
+            font-weight: 600;
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--space-2);
+        }
+
+        .job-meta {
+            display: flex;
+            gap: var(--space-4);
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-sm);
+        }
+
+        .job-type {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-1);
+            padding: var(--space-1) var(--space-3);
+            background: var(--color-accent-light);
+            color: var(--color-accent);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-xs);
+            font-weight: 600;
+        }
+
+        .apply-btn {
+            padding: var(--space-3) var(--space-6);
+            background: var(--color-accent);
+            color: white;
+            border: none;
+            border-radius: var(--radius-lg);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .apply-btn:hover {
+            background: #3db8af;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(78, 205, 196, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--color-text-primary);
+            color: white;
+            padding: var(--space-16) 0 var(--space-8);
+            margin-top: var(--space-20);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-8);
+            margin-bottom: var(--space-8);
+        }
+
+        .footer-section h3 {
+            margin-bottom: var(--space-4);
+            color: var(--color-accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: var(--space-2);
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        .footer-links a:hover {
+            color: var(--color-accent);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: var(--space-8);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: var(--space-6);
+                box-shadow: 0 10px 30px var(--color-shadow);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .search-input {
+                width: 150px;
+            }
+
+            .search-input:focus {
+                width: 200px;
+            }
+
+            .hero-title {
+                font-size: var(--font-size-3xl);
+            }
+
+            .hero-search {
+                flex-direction: column;
+            }
+
+            .featured-news {
+                grid-column: span 1;
+                grid-template-columns: 1fr;
+            }
+
+            .featured-news-image {
+                height: 200px;
+            }
+
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .destinations-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-4);
+            }
+
+            .directory-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .job-card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-6);
+            }
+
+            .apply-btn {
+                width: 100%;
+            }
+        }
+
+        /* Loading Animation */
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 5%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: var(--space-6);
+            right: var(--space-6);
+            background: var(--color-text-primary);
+            color: white;
+            padding: var(--space-4) var(--space-6);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all var(--transition-base);
+            z-index: 2000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Destination specific image filters */
+        .destination-kyoto {
+            filter: brightness(1.1) contrast(1.05);
+        }
+
+        .destination-santorini {
+            filter: saturate(1.2) brightness(1.05);
+        }
+
+        .destination-machupicchu {
+            filter: contrast(1.1) saturate(1.1);
+        }
+
+        .destination-dubai {
+            filter: brightness(1.1) contrast(1.05);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="nav-container">
+                <a href="#" class="logo">
+                    <i class="fas fa-globe-americas"></i>
+                    International Travel
+                </a>
+                
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#news" class="nav-link active">News</a></li>
+                    <li><a href="#destinations" class="nav-link">Destinations</a></li>
+                    <li><a href="#directory" class="nav-link">Directory</a></li>
+                    <li><a href="#jobs" class="nav-link">Jobs</a></li>
+                    <li><a href="#reviews" class="nav-link">Reviews</a></li>
+                </ul>
+                
+                <div class="nav-actions">
+                    <div class="search-bar">
+                        <input type="text" class="search-input" placeholder="Search...">
+                        <button class="search-btn"><i class="fas fa-search"></i></button>
+                    </div>
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Your Global Travel Intelligence Hub</h1>
+                <p class="hero-subtitle">Navigate the world with trusted information, insights, and opportunities</p>
+                
+                <div class="hero-search">
+                    <input type="text" class="hero-search-input" placeholder="What are you looking for today?">
+                    <button class="hero-search-btn">Search</button>
+                </div>
+                
+                <div class="quick-actions">
+                    <a href="#news" class="quick-action-btn">
+                        <i class="fas fa-newspaper"></i> Latest News
+                    </a>
+                    <a href="#destinations" class="quick-action-btn">
+                        <i class="fas fa-map-marked-alt"></i> Explore Places
+                    </a>
+                    <a href="#directory" class="quick-action-btn">
+                        <i class="fas fa-address-book"></i> Find Operators
+                    </a>
+                    <a href="#jobs" class="quick-action-btn">
+                        <i class="fas fa-briefcase"></i> Travel Jobs
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="py-16" id="news">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Latest Travel News</h2>
+                <p class="section-description">Stay informed with global travel updates and insights</p>
+            </div>
+            
+            <div class="news-grid">
+                <article class="featured-news card">
+                    <img src="https://picsum.photos/seed/news1/600/400" alt="Featured News" class="featured-news-image">
+                    <div class="featured-news-content">
+                        <span class="card-category">Breaking</span>
+                        <h3 class="card-title">New Travel Corridors Open Between Asia and Europe</h3>
+                        <p class="card-description">Major airlines announce expanded routes connecting key business and leisure destinations, promising more options for international travelers.</p>
+                        <div class="card-meta">
+                            <div class="card-author">
+                                <img src="https://picsum.photos/seed/author1/50/50" alt="Author">
+                                <span>Sarah Johnson</span>
+                            </div>
+                            <span>5 min read</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="card">
+                    <img src="https://picsum.photos/seed/news2/400/200" alt="News" class="card-image">
+                    <div class="card-content">
+                        <span class="card-category">Sustainability</span>
+                        <h3 class="card-title">Eco-Tourism Trends Shaping 2024</h3>
+                        <p class="card-description">How sustainable travel practices are becoming the new standard in the tourism industry.</p>
+                        <div class="card-meta">
+                            <div class="card-author">
+                                <img src="https://picsum.photos/seed/author2/50/50" alt="Author">
+                                <span>Mike Chen</span>
+                            </div>
+                            <span>3 min read</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="card">
+                    <img src="https://picsum.photos/seed/news3/400/200" alt="News" class="card-image">
+                    <div class="card-content">
+                        <span class="card-category">Technology</span>
+                        <h3 class="card-title">AI Revolutionizes Travel Planning</h3>
+                        <p class="card-description">New artificial intelligence tools are making personalized travel itineraries more accessible than ever.</p>
+                        <div class="card-meta">
+                            <div class="card-author">
+                                <img src="https://picsum.photos/seed/author3/50/50" alt="Author">
+                                <span>Emma Davis</span>
+                            </div>
+                            <span>4 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <img src="https://picsum.photos/seed/news3/400/200" alt="News" class="card-image">
+                    <div class="card-content">
+                        <span class="card-category">Technology</span>
+                        <h3 class="card-title">AI Revolutionizes Travel Planning</h3>
+                        <p class="card-description">New artificial intelligence tools are making personalized travel itineraries more accessible than ever.</p>
+                        <div class="card-meta">
+                            <div class="card-author">
+                                <img src="https://picsum.photos/seed/author3/50/50" alt="Author">
+                                <span>Emma Davis</span>
+                            </div>
+                            <span>4 min read</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <img src="https://picsum.photos/seed/news3/400/200" alt="News" class="card-image">
+                    <div class="card-content">
+                        <span class="card-category">Technology</span>
+                        <h3 class="card-title">AI Revolutionizes Travel Planning</h3>
+                        <p class="card-description">New artificial intelligence tools are making personalized travel itineraries more accessible than ever.</p>
+                        <div class="card-meta">
+                            <div class="card-author">
+                                <img src="https://picsum.photos/seed/author3/50/50" alt="Author">
+                                <span>Emma Davis</span>
+                            </div>
+                            <span>4 min read</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Destinations Section -->
+    <section class="py-16 destinations-section" id="destinations">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Top Destinations</h2>
+                <p class="section-description">Discover trending places around the world</p>
+            </div>
+            
+            <div class="destinations-grid">
+                <!-- Kyoto, Japan -->
+                <div class="destination-card">
+                    <span class="destination-badge">Cultural Gem</span>
+                    <img src="https://picsum.photos/seed/kyoto-temple-fushimi-inari-torii-gates-japan/400/400" alt="Kyoto Temple" class="card-image destination-kyoto">
+                    <div class="destination-overlay">
+                        <h3 class="destination-title">Kyoto, Japan</h3>
+                        <p class="destination-subtitle">Ancient capital of timeless traditions</p>
+                        <div class="destination-stats">
+                            <div class="destination-stat">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span>4.8</span>
+                                </div>
+                            </div>
+                            <div class="destination-stat">
+                                <i class="fas fa-landmark"></i>
+                                <span>150+ Temples</span>
+                            </div>
+                            <div class="destination-stat">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>Mar-May</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Santorini, Greece -->
+                <div class="destination-card">
+                    <span class="destination-badge">Romantic Escape</span>
+                    <img src="https://picsum.photos/seed/santorini-greece-blue-domes-white-buildings-caldera/400/400" alt="Santorini" class="card-image destination-santorini">
+                    <div class="destination-overlay">
+                        <h3 class="destination-title">Santorini, Greece</h3>
+                        <p class="destination-subtitle">Stunning sunsets and azure waters</p>
+                        <div class="destination-stats">
+                            <div class="destination-stat">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span>4.9</span>
+                                </div>
+                            </div>
+                            <div class="destination-stat">
+                                <i class="fas fa-umbrella-beach"></i>
+                                <span>20+ Beaches</span>
+                            </div>
+                            <div class="destination-stat">
+                                <i class="fas fa-sun"></i>
+                                <span>Jun-Sep</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Machu Picchu, Peru -->
+                <div class="destination-card">
+                    <span class="destination-badge">Wonder of World</span>
+                    <img src="https://picsum.photos/seed/machu-picchu-peru-incan-ruins-mountain-ancient/400/400" alt="Machu Picchu" class="card-image destination-machupicchu">
+                    <div class="destination-overlay">
+                        <h3 class="destination-title">Machu Picchu, Peru</h3>
+                        <p class="destination-subtitle">Lost city of the Inca Empire</p>
+                        <div class="destination-stats">
+                            <div class="destination-stat">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span>4.7</span>
+                                </div>
+                            </div>
+                            <div class="destination-stat">
+                                <i class="fas fa-mountain"></i>
+                                <span>2,430m Altitude</span>
+                            </div>
+                            <div class="destination-stat">
+                                <i class="fas fa-hiking"></i>
+                                <span>May-Sep</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dubai, UAE -->
+                <div class="destination-card">
+                    <span class="destination-badge">Modern Marvel</span>
+                    <img src="https://picsum.photos/seed/dubai-uae-burj-khalifa-skyline-modern-city/400/400" alt="Dubai Skyline" class="card-image destination-dubai">
+                    <div class="destination-overlay">
+                        <h3 class="destination-title">Dubai, UAE</h3>
+                        <p class="destination-subtitle">Futuristic oasis in the desert</p>
+                        <div class="destination-stats">
+                            <div class="destination-stat">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span>4.6</span>
+                                </div>
+                            </div>
+                            <div class="destination-stat">
+                                <i class="fas fa-city"></i>
+                                <span>Modern Metropolis</span>
+                            </div>
+                            <div class="destination-stat">
+                                <i class="fas fa-sun"></i>
+                                <span>Nov-Mar</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Directory Section -->
+    <section class="py-16" id="directory">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Travel & Tour Operators</h2>
+                <p class="section-description">Connect with verified travel professionals</p>
+            </div>
+            
+            <div class="directory-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="adventure">Adventure</button>
+                <button class="filter-btn" data-filter="luxury">Luxury</button>
+                <button class="filter-btn" data-filter="eco">Eco-Tourism</button>
+                <button class="filter-btn" data-filter="cultural">Cultural</button>
+            </div>
+            
+            <div class="directory-grid">
+                <div class="card operator-card" data-category="adventure">
+                    <img src="https://picsum.photos/seed/op1/60/60" alt="Operator" class="operator-logo">
+                    <div class="operator-info">
+                        <div class="operator-name">Adventure Worldwide</div>
+                        <div class="text-secondary text-sm">Specializing in extreme sports and outdoor expeditions</div>
+                        <div class="operator-services">
+                            <span class="service-tag">Hiking</span>
+                            <span class="service-tag">Diving</span>
+                            <span class="service-tag">Safari</span>
+                        </div>
+                    </div>
+                    <span class="verified-badge">
+                        <i class="fas fa-check-circle"></i> Verified
+                    </span>
+                </div>
+                
+                <div class="card operator-card" data-category="luxury">
+                    <img src="https://picsum.photos/seed/op2/60/60" alt="Operator" class="operator-logo">
+                    <div class="operator-info">
+                        <div class="operator-name">Luxury Escapes</div>
+                        <div class="text-secondary text-sm">Premium travel experiences worldwide</div>
+                        <div class="operator-services">
+                            <span class="service-tag">5-Star</span>
+                            <span class="service-tag">Private Jets</span>
+                            <span class="service-tag">Yachts</span>
+                        </div>
+                    </div>
+                    <span class="verified-badge">
+                        <i class="fas fa-check-circle"></i> Verified
+                    </span>
+                </div>
+                
+                <div class="card operator-card" data-category="eco">
+                    <img src="https://picsum.photos/seed/op3/60/60" alt="Operator" class="operator-logo">
+                    <div class="operator-info">
+                        <div class="operator-name">Green Earth Tours</div>
+                        <div class="text-secondary text-sm">Sustainable and responsible travel</div>
+                        <div class="operator-services">
+                            <span class="service-tag">Eco-Lodges</span>
+                            <span class="service-tag">Wildlife</span>
+                            <span class="service-tag">Conservation</span>
+                        </div>
+                    </div>
+                    <span class="verified-badge">
+                        <i class="fas fa-check-circle"></i> Verified
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Jobs Section -->
+    <section class="py-16" id="jobs" style="background: var(--color-secondary);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Travel Job Opportunities</h2>
+                <p class="section-description">Find your dream career in the travel industry</p>
+            </div>
+            
+            <div class="jobs-list">
+                <div class="job-card">
+                    <div class="job-info">
+                        <h3 class="job-title">Senior Travel Consultant</h3>
+                        <div class="job-meta">
+                            <span><i class="fas fa-building"></i> Global Travel Group</span>
+                            <span><i class="fas fa-map-marker-alt"></i> London, UK</span>
+                            <span><i class="fas fa-money-bill-wave"></i> £45,000 - £60,000</span>
+                            <span><i class="fas fa-clock"></i> 2 days ago</span>
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; align-items: flex-end; gap: var(--space-2);">
+                        <span class="job-type"><i class="fas fa-briefcase"></i> Full-time</span>
+                        <button class="apply-btn">Apply Now</button>
+                    </div>
+                </div>
+                
+                <div class="job-card">
+                    <div class="job-info">
+                        <h3 class="job-title">Digital Marketing Manager</h3>
+                        <div class="job-meta">
+                            <span><i class="fas fa-building"></i> Adventure Tours Inc.</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Remote</span>
+                            <span><i class="fas fa-money-bill-wave"></i> $65,000 - $80,000</span>
+                            <span><i class="fas fa-clock"></i> 1 week ago</span>
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; align-items: flex-end; gap: var(--space-2);">
+                        <span class="job-type"><i class="fas fa-home"></i> Remote</span>
+                        <button class="apply-btn">Apply Now</button>
+                    </div>
+                </div>
+                
+                <div class="job-card">
+                    <div class="job-info">
+                        <h3 class="job-title">Tour Guide - Southeast Asia</h3>
+                        <div class="job-meta">
+                            <span><i class="fas fa-building"></i> Cultural Explorers</span>
+                            <span><i class="fas fa-map-marker-alt"></i> Bangkok, Thailand</span>
+                            <span><i class="fas fa-money-bill-wave"></i> $30,000 - $40,000</span>
+                            <span><i class="fas fa-clock"></i> 3 days ago</span>
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; align-items: flex-end; gap: var(--space-2);">
+                        <span class="job-type"><i class="fas fa-briefcase"></i> Full-time</span>
+                        <button class="apply-btn">Apply Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About IT</h3>
+                    <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: var(--space-4);">
+                        Your trusted global travel intelligence platform, providing comprehensive information, 
+                        insights, and opportunities for travelers worldwide.
+                    </p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#news">Travel News</a></li>
+                        <li><a href="#destinations">Destinations</a></li>
+                        <li><a href="#directory">Directory</a></li>
+                        <li><a href="#jobs">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Travel Guidelines</a></li>
+                        <li><a href="#">Safety Tips</a></li>
+                        <li><a href="#">Visa Information</a></li>
+                        <li><a href="#">Currency Converter</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> Newsletter</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 International Travel (IT). All rights reserved. | Privacy Policy | Terms of Service</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span id="toastMessage">Welcome to International Travel!</span>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileMenuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const icon = mobileMenuToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Header Scroll Effect
+        const header = document.getElementById('header');
+        let lastScroll = 0;
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Active Navigation Link
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section[id]');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (scrollY >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Filter Functionality for Directory
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const operatorCards = document.querySelectorAll('.operator-card');
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const filter = btn.getAttribute('data-filter');
+                
+                operatorCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'flex';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 10);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // Search Functionality
+        const searchInputs = document.querySelectorAll('.search-input, .hero-search-input');
+        const searchBtns = document.querySelectorAll('.search-btn, .hero-search-btn');
+        
+        searchBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const searchInput = btn.parentElement.querySelector('input') || 
+                                  document.querySelector('.hero-search-input');
+                const searchTerm = searchInput.value.trim();
+                
+                if (searchTerm) {
+                    showToast(`Searching for: ${searchTerm}`);
+                    // Implement actual search logic here
+                }
+            });
+        });
+
+        searchInputs.forEach(input => {
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    const searchTerm = input.value.trim();
+                    if (searchTerm) {
+                        showToast(`Searching for: ${searchTerm}`);
+                        // Implement actual search logic here
+                    }
+                }
+            });
+        });
+
+        // Apply Button Click Handler
+        const applyBtns = document.querySelectorAll('.apply-btn');
+        applyBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const jobTitle = btn.closest('.job-card').querySelector('.job-title').textContent;
+                showToast(`Application started for: ${jobTitle}`);
+            });
+        });
+
+        // Quick Action Buttons
+        const quickActionBtns = document.querySelectorAll('.quick-action-btn');
+        quickActionBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = btn.getAttribute('href');
+                const section = document.querySelector(target);
+                if (section) {
+                    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Toast Notification Function
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Enhanced Destination Card Interactions
+        const destinationCards = document.querySelectorAll('.destination-card');
+        destinationCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const title = this.querySelector('.destination-title').textContent;
+                const badge = this.querySelector('.destination-badge').textContent;
+                showToast(`Exploring ${title} - ${badge}`);
+            });
+        });
+
+        // Card Click Handlers
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            card.addEventListener('click', function(e) {
+                // Prevent click on buttons inside cards
+                if (e.target.tagName === 'BUTTON' || e.target.tagName === 'A') {
+                    return;
+                }
+                
+                // Add a subtle animation
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+            });
+        });
+
+        // Lazy Loading Simulation for Images
+        const images = document.querySelectorAll('img');
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.style.opacity = '0';
+                    img.onload = () => {
+                        img.style.transition = 'opacity 0.5s ease';
+                        img.style.opacity = '1';
+                    };
+                    observer.unobserve(img);
+                }
+            });
+        });
+
+        images.forEach(img => imageObserver.observe(img));
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Show welcome toast
+            setTimeout(() => {
+                showToast('Welcome to International Travel - Your Global Travel Toolkit!');
+            }, 1000);
+            
+            // Add smooth reveal animations to sections
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('section').forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                sectionObserver.observe(section);
+            });
+        });
+
+        // Keyboard Navigation Support
+        document.addEventListener('keydown', (e) => {
+            // Press '/' to focus search
+            if (e.key === '/' && !e.ctrlKey && !e.metaKey) {
+                e.preventDefault();
+                document.querySelector('.search-input').focus();
+            }
+            
+            // Press 'Escape' to close mobile menu
+            if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                mobileMenuToggle.querySelector('i').classList.add('fa-bars');
+                mobileMenuToggle.querySelector('i').classList.remove('fa-times');
+            }
+        });
+
+        // Destination specific hover effects
+        destinationCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                const badge = this.querySelector('.destination-badge');
+                if (badge) {
+                    badge.style.transform = 'scale(1.1) rotate(-2deg)';
+                }
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                const badge = this.querySelector('.destination-badge');
+                if (badge) {
+                    badge.style.transform = 'scale(1) rotate(0deg)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
